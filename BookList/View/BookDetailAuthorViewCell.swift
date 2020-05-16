@@ -1,21 +1,16 @@
 //
-//  BookTableViewCell.swift
+//  BookDetailAuthorViewCell.swift
 //  BookList
 //
-//  Created by 田露 on 15/5/20.
+//  Created by 田露 on 17/5/20.
 //  Copyright © 2020 LuTian. All rights reserved.
 //
 
 import UIKit
 
-class BookTableViewCell: UITableViewCell {
-
-    @IBOutlet weak var bookImageView: UIImageView!
-    @IBOutlet weak var nameLabel: UILabel!
+class BookDetailAuthorViewCell: UITableViewCell {
     @IBOutlet weak var authorLabel: UILabel!
-    @IBOutlet weak var pagesLabel: UILabel!
-    @IBOutlet weak var markImageView: UIImageView!
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
     }

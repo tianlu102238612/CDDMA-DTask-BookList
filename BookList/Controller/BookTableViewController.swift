@@ -14,12 +14,7 @@ class BookTableViewController: UITableViewController,NSFetchedResultsControllerD
     var fetchResultController:NSFetchedResultsController<BookMO>!
     var searchController:UISearchController!
     var searchResults:[BookMO]=[]
-//    var books:[Book] = [Book(name: "Book1", author: "author1", type: "Fiction", pages: 100, inFinished: false, summary: "summary 1", image: "book1"),
-//                        Book(name: "Book2", author: "author2", type: "Novel", pages: 200, inFinished: false, summary: "summary 1", image: "book2"),
-//                        Book(name: "Book3", author: "author3", type: "Fiction", pages: 300, inFinished: false, summary: "summary 1", image: "book3"),
-//                        Book(name: "Book4", author: "author4", type: "Fiction", pages: 400, inFinished: false, summary: "summary 1", image: "book4"),
-//    ]
-    
+
     //MARK: - View controller life cycle
 
     override func viewDidLoad() {
@@ -102,6 +97,7 @@ class BookTableViewController: UITableViewController,NSFetchedResultsControllerD
         cell.nameLabel?.text = book.name
         cell.authorLabel?.text = book.author
         cell.pagesLabel?.text = String(book.page)
+        cell.markImageView.isHidden = book.isFinished ?false:true
         if let bookImage = book.image{
             cell.bookImageView.image = UIImage(data: bookImage as Data)
         }
@@ -111,6 +107,7 @@ class BookTableViewController: UITableViewController,NSFetchedResultsControllerD
     }
 
 
+    //MARK: -SWIPE ACTION CONFIGURATION
 
   override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
     let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { (action, sourceView,completionHandler) in
@@ -124,17 +121,27 @@ class BookTableViewController: UITableViewController,NSFetchedResultsControllerD
     // Call completion handler to dismiss the action button
     completionHandler(true)
     }
-    let shareAction = UIContextualAction(style: .normal, title: "Share") {
-    (action, sourceView, completionHandler) in
-        let defaultText = "Just checking in at " + self.books[indexPath.row].name!
-    let activityController = UIActivityViewController(activityItems: [
-    defaultText], applicationActivities: nil)
-    self.present(activityController, animated: true, completion: nil)
-    completionHandler(true)
-    }
-    let swipeConfiguration = UISwipeActionsConfiguration(actions: [deleteAction, shareAction])
+    let swipeConfiguration = UISwipeActionsConfiguration(actions: [deleteAction])
     return swipeConfiguration
     }
+    
+    override func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let markAction = UIContextualAction(style: .normal, title: "MarkAsRead") { _, _, completionHandler in
+
+            let cell = tableView.cellForRow(at: indexPath) as! BookTableViewCell
+            self.books[indexPath.row].isFinished = self.books[indexPath.row].isFinished ? false : true
+            cell.markImageView.isHidden = self.books[indexPath.row].isFinished ? false : true
+            completionHandler(true)
+        }
+
+        let markText = books[indexPath.row].isFinished ? "Mark As Unread" : "Mark As Read"
+        markAction.title = markText
+        markAction.backgroundColor = .orange
+        
+        let swipeConfiguration = UISwipeActionsConfiguration(actions: [markAction])
+        return swipeConfiguration
+    }
+    
    
     //MARK: -NSFetchedResultsControllerDelegate methods
     //start when nsfrc is about to start processing the content change

@@ -41,7 +41,7 @@ class NewBookController: UITableViewController,UITextFieldDelegate,UIImagePicker
             book = BookMO(context: appDelegate.persistentContainer.viewContext)
             book.name = nameTextField.text
             book.author = authorTextField.text
-//            book?.page = Int16(pageTextField.text)
+//            pages = Int16(pageTextField.text)
             book.type = typeTextField.text
             book.isFinished = false
             book.memo = memoTextView.text
