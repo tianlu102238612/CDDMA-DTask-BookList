@@ -106,14 +106,4 @@ class NewBookController: UITableViewController,UITextFieldDelegate,UIImagePicker
         }
         //dismiss the image picker
         dismiss(animated: true, completion: nil)}
-    
-    //start when nsfrc is about to start processing the content change
-    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        tableView.beginUpdates()
-    }
-    
-    //automatically call when there is any content change in the managed object context
-    
-    
-    
 }

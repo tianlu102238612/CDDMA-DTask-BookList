@@ -43,10 +43,14 @@ class BookDetailViewController: UIViewController {
         nameLabel.text = book.name
         authorLabel.text = book.author
     }
+    
     @IBAction func rateBook(segue: UIStoryboardSegue) {
         if let rating = segue.identifier {
             self.book.rating = rating
-        self.ratingImageView.image = UIImage(named: rating)
+            self.ratingImageView.image = UIImage(named: rating)
+            if let appDelegate = (UIApplication.shared.delegate as? AppDelegate){
+                appDelegate.saveContext()
+            }
         }
         dismiss(animated: true, completion: nil)
         

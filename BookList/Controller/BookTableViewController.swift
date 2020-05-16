@@ -96,11 +96,14 @@ class BookTableViewController: UITableViewController,NSFetchedResultsControllerD
 
 
   override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-    let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { (action, sourceView, completionHandler) in
-    // Delete the row from the data source
-    self.books.remove(at: indexPath.row)
-  
-    self.tableView.deleteRows(at: [indexPath], with: .fade)
+    let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { (action, sourceView,completionHandler) in
+        if let appDelegate = (UIApplication.shared.delegate as? AppDelegate){
+            let context = appDelegate.persistentContainer.viewContext
+            let bookToDelete = self.fetchResultController.object(at: indexPath)
+            context.delete(bookToDelete)
+            //apply changes
+            appDelegate.saveContext()
+        }
     // Call completion handler to dismiss the action button
     completionHandler(true)
     }
@@ -116,5 +119,40 @@ class BookTableViewController: UITableViewController,NSFetchedResultsControllerD
     return swipeConfiguration
     }
    
+    //MARK: -NSFetchedResultsControllerDelegate methods
+    //start when nsfrc is about to start processing the content change
+    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        tableView.beginUpdates()
+    }
+    
+    //automatically call when there is any content change in the managed object context
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>,didChange anyObject:Any, at indexPath:IndexPath?, for type:NSFetchedResultsChangeType, newIndexPath:IndexPath?){
+        
+        switch type {
+        case .insert:
+            if let newIndexPath = newIndexPath{
+                tableView.insertRows(at: [newIndexPath], with:.fade)
+            }
+        case .delete:
+            if let indexPath = indexPath{
+                tableView.deleteRows(at: [indexPath], with: .fade)
+            }
+        case .update:
+            if let indexPath = indexPath{
+                tableView.reloadRows(at: [indexPath], with: .fade)
+            }
+        default:
+            tableView.reloadData()
+        }
+        
+        if let fetchedObjects = controller.fetchedObjects {
+            books = fetchedObjects as! [BookMO]
+        }
+    }
+    
+    //complete update and animate change
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        tableView.endUpdates()
+    }
 
 }

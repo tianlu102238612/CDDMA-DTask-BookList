@@ -301,14 +301,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="1id-DK-YuS">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.29999999999999999" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="1id-DK-YuS">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sJr-o1-7lq">
                                 <rect key="frame" x="363.5" y="10" width="30.5" height="29"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" image="xmark" catalog="system">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="30"/>
                                 </state>
                                 <connections>
@@ -316,46 +316,54 @@
                                 </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="hN6-sF-eTb">
-                                <rect key="frame" x="108" y="170.5" width="198" height="501"/>
+                                <rect key="frame" x="44.5" y="170.5" width="325" height="501"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dCM-Lb-oxT">
-                                        <rect key="frame" x="0.0" y="0.0" width="144" height="82"/>
-                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
-                                        <state key="normal" title="Best" image="best"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="204" height="82"/>
+                                        <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="59"/>
+                                        <state key="normal" title=" Best" image="best">
+                                            <color key="titleColor" red="0.96130555868148804" green="0.68358360670803153" blue="0.70799279862289966" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        </state>
                                         <connections>
                                             <segue destination="EX1-TP-gU8" kind="unwind" identifier="best" unwindAction="rateBookWithSegue:" id="lVz-Dw-XWv"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KRe-A4-aVw">
-                                        <rect key="frame" x="0.0" y="97" width="146" height="83"/>
-                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
-                                        <state key="normal" title="Cool" image="cool">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <rect key="frame" x="0.0" y="97" width="224" height="83"/>
+                                        <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="59"/>
+                                        <state key="normal" title=" Cool" image="cool">
+                                            <color key="titleColor" systemColor="systemTealColor" red="0.35294117650000001" green="0.7843137255" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <connections>
                                             <segue destination="EX1-TP-gU8" kind="unwind" identifier="cool" unwindAction="rateBookWithSegue:" id="uHn-kN-oHc"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kgn-33-wC5">
-                                        <rect key="frame" x="0.0" y="195" width="198" height="86"/>
-                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
-                                        <state key="normal" title="Average" image="average"/>
+                                        <rect key="frame" x="0.0" y="195" width="325" height="86"/>
+                                        <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="59"/>
+                                        <state key="normal" title=" Average" image="average">
+                                            <color key="titleColor" red="0.93278416450777202" green="0.84670119727471216" blue="0.47351203619335464" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        </state>
                                         <connections>
                                             <segue destination="EX1-TP-gU8" kind="unwind" identifier="average" unwindAction="rateBookWithSegue:" id="7lo-yl-8eU"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="c5B-Ij-eVz">
-                                        <rect key="frame" x="0.0" y="296" width="145" height="87"/>
-                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
-                                        <state key="normal" title="Poor" image="poor"/>
+                                        <rect key="frame" x="0.0" y="296" width="220" height="87"/>
+                                        <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="59"/>
+                                        <state key="normal" title=" Poor" image="poor">
+                                            <color key="titleColor" systemColor="systemTealColor" red="0.35294117650000001" green="0.7843137255" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
                                         <connections>
                                             <segue destination="EX1-TP-gU8" kind="unwind" identifier="poor" unwindAction="rateBookWithSegue:" id="HQY-5Y-USK"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z77-wW-D49">
-                                        <rect key="frame" x="0.0" y="398" width="165" height="103"/>
-                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
-                                        <state key="normal" title="Worst" image="worst"/>
+                                        <rect key="frame" x="0.0" y="398" width="253" height="103"/>
+                                        <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="59"/>
+                                        <state key="normal" title=" Worst" image="worst">
+                                            <color key="titleColor" red="0.96130555868148804" green="0.68358360670803153" blue="0.70799279862289966" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        </state>
                                         <connections>
                                             <segue destination="EX1-TP-gU8" kind="unwind" identifier="worst" unwindAction="rateBookWithSegue:" id="c6X-Uk-iZe"/>
                                         </connections>
