@@ -10,12 +10,7 @@ import UIKit
 
 class BookTableViewCell: UITableViewCell {
 
-    @IBOutlet weak var bookImageView: UIImageView!{
-    didSet {
-    bookImageView.layer.cornerRadius = 30.0
-    bookImageView.clipsToBounds = true
-    }
-    }
+    @IBOutlet weak var bookImageView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var authorLabel: UILabel!
     @IBOutlet weak var pagesLabel: UILabel!

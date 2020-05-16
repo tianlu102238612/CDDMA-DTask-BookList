@@ -8,10 +8,12 @@
 import CoreData
 import UIKit
 
-class BookTableViewController: UITableViewController,NSFetchedResultsControllerDelegate{
-    
+class BookTableViewController: UITableViewController,NSFetchedResultsControllerDelegate,UISearchResultsUpdating{
+
     var books:[BookMO] = []
     var fetchResultController:NSFetchedResultsController<BookMO>!
+    var searchController:UISearchController!
+    var searchResults:[BookMO]=[]
 //    var books:[Book] = [Book(name: "Book1", author: "author1", type: "Fiction", pages: 100, inFinished: false, summary: "summary 1", image: "book1"),
 //                        Book(name: "Book2", author: "author2", type: "Novel", pages: 200, inFinished: false, summary: "summary 1", image: "book2"),
 //                        Book(name: "Book3", author: "author3", type: "Fiction", pages: 300, inFinished: false, summary: "summary 1", image: "book3"),
@@ -21,7 +23,20 @@ class BookTableViewController: UITableViewController,NSFetchedResultsControllerD
     //MARK: - View controller life cycle
 
     override func viewDidLoad() {
+        let paths = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.documentDirectory, FileManager.SearchPathDomainMask.userDomainMask, true)
+        print(paths[0])
+        
         super.viewDidLoad()
+        
+        //create an instance of UISearchController, nil: display search results in the same view
+        searchController = UISearchController(searchResultsController: nil)
+        searchController.searchBar.placeholder = "Search by book name or author"
+        //add the search bar to the navigation bar
+        self.navigationItem.searchController = searchController
+        //updating the contents of the search controller
+        searchController.searchResultsUpdater = self
+        //do not dim the underlying content during a search (search&home are in the same view)
+        searchController.obscuresBackgroundDuringPresentation = false
         
         //fetch data from data source
         let fetchRequest:NSFetchRequest<BookMO> = BookMO.fetchRequest()
@@ -60,28 +75,29 @@ class BookTableViewController: UITableViewController,NSFetchedResultsControllerD
         if segue.identifier == "showBookDetail" {
         if let indexPath = tableView.indexPathForSelectedRow {
         let destinationController = segue.destination as! BookDetailViewController
-            destinationController.book = books[indexPath.row]
-        }
+            destinationController.book = (searchController.isActive) ?searchResults[indexPath.row]:books[indexPath.row]}
         }
         }
 
     // MARK: - Table view data source
-
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
         return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return books.count
+        if searchController.isActive{
+            return searchResults.count
+        }else{
+            return books.count
+        }
+        
     }
 
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
        let cellIdentifier = "datacell"
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! BookTableViewCell
-        let book = books[indexPath.row]
+        let book = (searchController.isActive) ? searchResults[indexPath.row] :books[indexPath.row]
         // Configure the cell...
         cell.nameLabel?.text = book.name
         cell.authorLabel?.text = book.author
@@ -89,6 +105,7 @@ class BookTableViewController: UITableViewController,NSFetchedResultsControllerD
         if let bookImage = book.image{
             cell.bookImageView.image = UIImage(data: bookImage as Data)
         }
+//        cell.checkImageView.isHidden = books[indexPath.row].isFinished ?false:true
         
         return cell
     }
@@ -154,5 +171,26 @@ class BookTableViewController: UITableViewController,NSFetchedResultsControllerD
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         tableView.endUpdates()
     }
-
+    
+    //MARK: -UISearchResultsUpdating method
+    func searchBook(for searchKeyword:String){
+        searchResults = books.filter({ (book) -> Bool in
+            if let name = book.name, let author = book.author{
+                let isMatch = name.localizedCaseInsensitiveContains(searchKeyword) || author.localizedCaseInsensitiveContains(searchKeyword)
+                return isMatch
+            }
+            return false
+        })
+    }
+    
+    //updateSearchResults: protocol stub of UISearchResultsUpdating
+    func updateSearchResults(for searchController:UISearchController){
+        if let searchKeyword = searchController.searchBar.text{
+            searchBook(for: searchKeyword)
+            print(searchKeyword)
+            print(searchResults)
+            tableView.reloadData()
+        }
+    }
+    
 }
