@@ -5,10 +5,11 @@
 //  Created by 田露 on 15/5/20.
 //  Copyright © 2020 LuTian. All rights reserved.
 //
-
+import CoreData
 import UIKit
 
 class BookDetailViewController: UIViewController {
+    var book:BookMO!
     
     
     @IBOutlet var tableView: UITableView!
@@ -29,14 +30,18 @@ class BookDetailViewController: UIViewController {
     var bookName = ""
     var bookAuthor = ""
     var bookPages = ""
-    var book = Book()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        bookImageView.image = UIImage(named: bookImageName)
-        nameLabel.text = bookName
-        authorLabel.text = bookAuthor
-
+        if let bookImage = book.image {
+            bookImageView.image = UIImage(data: bookImage as Data)
+        }
+        if let rating = book.rating{
+            ratingImageView.image = UIImage(named: rating)
+        }
+        
+        nameLabel.text = book.name
+        authorLabel.text = book.author
     }
     @IBAction func rateBook(segue: UIStoryboardSegue) {
         if let rating = segue.identifier {

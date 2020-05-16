@@ -18,7 +18,7 @@
 		0C1B3B2F246E53970028B087 /* Book.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C1B3B2E246E53970028B087 /* Book.swift */; };
 		0C1B3B35246E76E10028B087 /* ReviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C1B3B34246E76E10028B087 /* ReviewViewController.swift */; };
 		0C1B3B37246EA9530028B087 /* NewBookController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C1B3B36246EA9530028B087 /* NewBookController.swift */; };
-		0C1B3B3B246ECFA10028B087 /* BookDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C1B3B3A246ECFA10028B087 /* BookDetailViewController.swift */; };
+		0CFD93A5246FC6B9005B858C /* BookDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C1B3B3A246ECFA10028B087 /* BookDetailViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -185,7 +185,7 @@
 				0C1B3B2F246E53970028B087 /* Book.swift in Sources */,
 				0C1B3B25246E3D9C0028B087 /* BookTableViewController.swift in Sources */,
 				0C1B3B27246E424A0028B087 /* BookTableViewCell.swift in Sources */,
-				0C1B3B3B246ECFA10028B087 /* BookDetailViewController.swift in Sources */,
+				0CFD93A5246FC6B9005B858C /* BookDetailViewController.swift in Sources */,
 				0C1B3B35246E76E10028B087 /* ReviewViewController.swift in Sources */,
 				0C1B3B37246EA9530028B087 /* NewBookController.swift in Sources */,
 				0C1B3B10246E3CDB0028B087 /* SceneDelegate.swift in Sources */,

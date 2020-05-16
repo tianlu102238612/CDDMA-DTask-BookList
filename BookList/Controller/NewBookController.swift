@@ -5,10 +5,12 @@
 //  Created by 田露 on 15/5/20.
 //  Copyright © 2020 LuTian. All rights reserved.
 //
-
+import CoreData
 import UIKit
 
 class NewBookController: UITableViewController,UITextFieldDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate {
+    
+    var book:BookMO!
 
     @IBOutlet weak var photoImageView: UIImageView!
     @IBOutlet weak var photoTextField: UITextField!
@@ -33,6 +35,26 @@ class NewBookController: UITableViewController,UITextFieldDelegate,UIImagePicker
             return
             
         }
+        
+        // get reference to AppDelegate, persistentContainer is declared in AppDelegate.swift
+        if let appDelegate = (UIApplication.shared.delegate as? AppDelegate){
+            book = BookMO(context: appDelegate.persistentContainer.viewContext)
+            book.name = nameTextField.text
+            book.author = authorTextField.text
+//            book?.page = Int16(pageTextField.text)
+            book.type = typeTextField.text
+            book.isFinished = false
+            book.memo = memoTextView.text
+            
+            //retrieve the data of the selected image and convert it to a Data object
+            if let bookImage = photoImageView.image{
+                book.image = bookImage.pngData()
+            }
+            
+            print("saving data to context...")
+            appDelegate.saveContext()
+        }
+        dismiss(animated: true, completion: nil)
         
     }
     
@@ -84,4 +106,14 @@ class NewBookController: UITableViewController,UITextFieldDelegate,UIImagePicker
         }
         //dismiss the image picker
         dismiss(animated: true, completion: nil)}
+    
+    //start when nsfrc is about to start processing the content change
+    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        tableView.beginUpdates()
+    }
+    
+    //automatically call when there is any content change in the managed object context
+    
+    
+    
 }
