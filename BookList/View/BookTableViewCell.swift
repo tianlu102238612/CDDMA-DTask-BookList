@@ -15,6 +15,7 @@ class BookTableViewCell: UITableViewCell {
     @IBOutlet weak var authorLabel: UILabel!
     @IBOutlet weak var pagesLabel: UILabel!
     @IBOutlet weak var markImageView: UIImageView!
+    @IBOutlet weak var animationView: UIView!
     
     override func awakeFromNib() {
         super.awakeFromNib()

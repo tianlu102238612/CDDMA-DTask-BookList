@@ -4,9 +4,9 @@
         <attribute name="author" attributeType="String"/>
         <attribute name="image" attributeType="Binary"/>
         <attribute name="isFinished" attributeType="Boolean" usesScalarValueType="YES"/>
-        <attribute name="memo" attributeType="String" maxValueString="100"/>
+        <attribute name="memo" attributeType="String"/>
         <attribute name="name" attributeType="String"/>
-        <attribute name="page" attributeType="Integer 16" minValueString="1" maxValueString="2000" defaultValueString="1" usesScalarValueType="YES"/>
+        <attribute name="page" attributeType="Integer 16" defaultValueString="1" usesScalarValueType="YES"/>
         <attribute name="rating" optional="YES" attributeType="String"/>
         <attribute name="type" attributeType="String"/>
     </entity>

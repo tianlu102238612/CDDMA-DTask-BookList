@@ -7,6 +7,7 @@
 //
 import CoreData
 import UIKit
+import Lottie
 
 class BookTableViewController: UITableViewController,NSFetchedResultsControllerDelegate,UISearchResultsUpdating{
 
@@ -14,7 +15,9 @@ class BookTableViewController: UITableViewController,NSFetchedResultsControllerD
     var fetchResultController:NSFetchedResultsController<BookMO>!
     var searchController:UISearchController!
     var searchResults:[BookMO]=[]
-
+    
+//    let markView = AnimationView(name: "welldone")
+    
     //MARK: - View controller life cycle
 
     override func viewDidLoad() {
@@ -22,45 +25,12 @@ class BookTableViewController: UITableViewController,NSFetchedResultsControllerD
         print(paths[0])
         
         super.viewDidLoad()
-        
-        //create an instance of UISearchController, nil: display search results in the same view
-        searchController = UISearchController(searchResultsController: nil)
-        searchController.searchBar.placeholder = "Search by book name or author"
-        //add the search bar to the navigation bar
-        self.navigationItem.searchController = searchController
-        //updating the contents of the search controller
-        searchController.searchResultsUpdater = self
-        //do not dim the underlying content during a search (search&home are in the same view)
-        searchController.obscuresBackgroundDuringPresentation = false
-        
-        //fetch data from data source
-        let fetchRequest:NSFetchRequest<BookMO> = BookMO.fetchRequest()
-        
-        //sort the BookMO objects in a ascending order using the name key
-        let sortDescriptor = NSSortDescriptor(key: "name", ascending: true)
-        fetchRequest.sortDescriptors = [sortDescriptor]
-        
-        if let appDelegate = (UIApplication.shared.delegate as? AppDelegate){
-            let context = appDelegate.persistentContainer.viewContext
-            
-            //initialize fetchResultController and specify its delegate for monitoring data changes
-            fetchResultController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
-            fetchResultController.delegate = self
-            
-            //call the performFetch() method to execute the fetch result
-            do {
-                try fetchResultController.performFetch()
-                //get the BookMO objects by accessing the fetchedObjects property
-                if let fetchedObjects = fetchResultController.fetchedObjects {
-                    books = fetchedObjects
-                }
-            } catch {
-            print(error)
-            }
-        }
-        
+        addSearch()
+
         
     }
+    
+    
     
     @IBAction func unwindToHome(segue: UIStoryboardSegue) {
     dismiss(animated: true, completion: nil)
@@ -127,10 +97,17 @@ class BookTableViewController: UITableViewController,NSFetchedResultsControllerD
     
     override func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let markAction = UIContextualAction(style: .normal, title: "MarkAsRead") { _, _, completionHandler in
+            if let appDelegate = (UIApplication.shared.delegate as? AppDelegate){
+                let context = appDelegate.persistentContainer.viewContext
+                let bookToMark = self.fetchResultController.object(at: indexPath)
+                let cell = tableView.cellForRow(at: indexPath) as! BookTableViewCell
+                
+                
+                bookToMark.isFinished = bookToMark.isFinished ? false : true
+                cell.markImageView.isHidden = self.books[indexPath.row].isFinished ? false : true
 
-            let cell = tableView.cellForRow(at: indexPath) as! BookTableViewCell
-            self.books[indexPath.row].isFinished = self.books[indexPath.row].isFinished ? false : true
-            cell.markImageView.isHidden = self.books[indexPath.row].isFinished ? false : true
+                appDelegate.saveContext()
+            }
             completionHandler(true)
         }
 
@@ -194,10 +171,46 @@ class BookTableViewController: UITableViewController,NSFetchedResultsControllerD
     func updateSearchResults(for searchController:UISearchController){
         if let searchKeyword = searchController.searchBar.text{
             searchBook(for: searchKeyword)
-            print(searchKeyword)
-            print(searchResults)
             tableView.reloadData()
         }
     }
+    
+    func addSearch(){
+        //create an instance of UISearchController, nil: display search results in the same view
+        searchController = UISearchController(searchResultsController: nil)
+        searchController.searchBar.placeholder = "Search by book name or author"
+        //add the search bar to the navigation bar
+        self.navigationItem.searchController = searchController
+        //updating the contents of the search controller
+        searchController.searchResultsUpdater = self
+        //do not dim the underlying content during a search (search&home are in the same view)
+        searchController.obscuresBackgroundDuringPresentation = false
+        //fetch data from data source
+        let fetchRequest:NSFetchRequest<BookMO> = BookMO.fetchRequest()
+        //sort the BookMO objects in a ascending order using the name key
+        let sortDescriptor = NSSortDescriptor(key: "name", ascending: true)
+        fetchRequest.sortDescriptors = [sortDescriptor]
+        
+        if let appDelegate = (UIApplication.shared.delegate as? AppDelegate){
+            let context = appDelegate.persistentContainer.viewContext
+            
+            //initialize fetchResultController and specify its delegate for monitoring data changes
+            fetchResultController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
+            fetchResultController.delegate = self
+            
+            //call the performFetch() method to execute the fetch result
+            do {
+                try fetchResultController.performFetch()
+                //get the BookMO objects by accessing the fetchedObjects property
+                if let fetchedObjects = fetchResultController.fetchedObjects {
+                    books = fetchedObjects
+                }
+            } catch {
+            print(error)
+            }
+        }
+    }
+    
+    
     
 }
