@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Lottie
 
 class BookTableViewCell: UITableViewCell {
 
@@ -15,8 +16,8 @@ class BookTableViewCell: UITableViewCell {
     @IBOutlet weak var authorLabel: UILabel!
     @IBOutlet weak var pagesLabel: UILabel!
     @IBOutlet weak var markImageView: UIImageView!
-    @IBOutlet weak var animationView: UIView!
     
+
     override func awakeFromNib() {
         super.awakeFromNib()
     }
@@ -24,5 +25,6 @@ class BookTableViewCell: UITableViewCell {
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
+    
 
 }

@@ -16,20 +16,30 @@ class BookTableViewController: UITableViewController,NSFetchedResultsControllerD
     var searchController:UISearchController!
     var searchResults:[BookMO]=[]
     
-//    let markView = AnimationView(name: "welldone")
+
     
+
     //MARK: - View controller life cycle
 
     override func viewDidLoad() {
+
         let paths = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.documentDirectory, FileManager.SearchPathDomainMask.userDomainMask, true)
         print(paths[0])
         
         super.viewDidLoad()
         addSearch()
-
-        
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        if UserDefaults.standard.bool(forKey: "walkthroughScreenViewed") {
+            return
+        }
+        
+        let storyboard = UIStoryboard(name: "walkthrough", bundle: nil)
+        if let walkthroughViewController = storyboard.instantiateViewController(withIdentifier:"WalkthroughViewController") as? WalkthroughViewController{
+                present(walkthroughViewController, animated: true, completion: nil)
+        }
+    }
     
     
     @IBAction func unwindToHome(segue: UIStoryboardSegue) {
@@ -71,6 +81,7 @@ class BookTableViewController: UITableViewController,NSFetchedResultsControllerD
         if let bookImage = book.image{
             cell.bookImageView.image = UIImage(data: bookImage as Data)
         }
+ 
 //        cell.checkImageView.isHidden = books[indexPath.row].isFinished ?false:true
         
         return cell
@@ -101,17 +112,18 @@ class BookTableViewController: UITableViewController,NSFetchedResultsControllerD
                 let context = appDelegate.persistentContainer.viewContext
                 let bookToMark = self.fetchResultController.object(at: indexPath)
                 let cell = tableView.cellForRow(at: indexPath) as! BookTableViewCell
-                
-                
                 bookToMark.isFinished = bookToMark.isFinished ? false : true
                 cell.markImageView.isHidden = self.books[indexPath.row].isFinished ? false : true
 
                 appDelegate.saveContext()
+                
             }
             completionHandler(true)
+            
         }
 
         let markText = books[indexPath.row].isFinished ? "Mark As Unread" : "Mark As Read"
+
         markAction.title = markText
         markAction.backgroundColor = .orange
         
@@ -125,30 +137,23 @@ class BookTableViewController: UITableViewController,NSFetchedResultsControllerD
     func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         tableView.beginUpdates()
     }
-    
     //automatically call when there is any content change in the managed object context
     func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>,didChange anyObject:Any, at indexPath:IndexPath?, for type:NSFetchedResultsChangeType, newIndexPath:IndexPath?){
-        
         switch type {
         case .insert:
             if let newIndexPath = newIndexPath{
-                tableView.insertRows(at: [newIndexPath], with:.fade)
-            }
+                tableView.insertRows(at: [newIndexPath], with:.fade)}
         case .delete:
             if let indexPath = indexPath{
-                tableView.deleteRows(at: [indexPath], with: .fade)
-            }
+                tableView.deleteRows(at: [indexPath], with: .fade)}
         case .update:
             if let indexPath = indexPath{
-                tableView.reloadRows(at: [indexPath], with: .fade)
-            }
+                tableView.reloadRows(at: [indexPath], with: .fade)}
         default:
-            tableView.reloadData()
-        }
+            tableView.reloadData()}
         
         if let fetchedObjects = controller.fetchedObjects {
-            books = fetchedObjects as! [BookMO]
-        }
+            books = fetchedObjects as! [BookMO]}
     }
     
     //complete update and animate change

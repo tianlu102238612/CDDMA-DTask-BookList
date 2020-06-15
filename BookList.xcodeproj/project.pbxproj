@@ -15,9 +15,12 @@
 		0C1B3B25246E3D9C0028B087 /* BookTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C1B3B24246E3D9C0028B087 /* BookTableViewController.swift */; };
 		0C1B3B27246E424A0028B087 /* BookTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C1B3B26246E424A0028B087 /* BookTableViewCell.swift */; };
 		0C1B3B2B246E45D70028B087 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0C1B3B2A246E45D70028B087 /* Assets.xcassets */; };
-		0C1B3B2F246E53970028B087 /* Book.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C1B3B2E246E53970028B087 /* Book.swift */; };
 		0C1B3B35246E76E10028B087 /* ReviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C1B3B34246E76E10028B087 /* ReviewViewController.swift */; };
 		0C1B3B37246EA9530028B087 /* NewBookController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C1B3B36246EA9530028B087 /* NewBookController.swift */; };
+		0CAA4C012486344A00F9EBB2 /* walkthrough.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0CAA4C002486344A00F9EBB2 /* walkthrough.storyboard */; };
+		0CAA4C03248664FD00F9EBB2 /* WalkthroughContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CAA4C02248664FD00F9EBB2 /* WalkthroughContentViewController.swift */; };
+		0CAA4C052486692400F9EBB2 /* WalkthroughPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CAA4C042486692400F9EBB2 /* WalkthroughPageViewController.swift */; };
+		0CAA4C072486794A00F9EBB2 /* WalkthroughViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CAA4C062486794A00F9EBB2 /* WalkthroughViewController.swift */; };
 		0CE6E6A624715292006AF2AA /* welldone.json in Resources */ = {isa = PBXBuildFile; fileRef = 0CE6E6A524715292006AF2AA /* welldone.json */; };
 		0CFD93A5246FC6B9005B858C /* BookDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C1B3B3A246ECFA10028B087 /* BookDetailViewController.swift */; };
 		0CFD93B42470182B005B858C /* BookDetailTypeViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CFD93AE247013CF005B858C /* BookDetailTypeViewCell.swift */; };
@@ -40,10 +43,13 @@
 		0C1B3B24246E3D9C0028B087 /* BookTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookTableViewController.swift; sourceTree = "<group>"; };
 		0C1B3B26246E424A0028B087 /* BookTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookTableViewCell.swift; sourceTree = "<group>"; };
 		0C1B3B2A246E45D70028B087 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		0C1B3B2E246E53970028B087 /* Book.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Book.swift; sourceTree = "<group>"; };
 		0C1B3B34246E76E10028B087 /* ReviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewViewController.swift; sourceTree = "<group>"; };
 		0C1B3B36246EA9530028B087 /* NewBookController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewBookController.swift; sourceTree = "<group>"; };
 		0C1B3B3A246ECFA10028B087 /* BookDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookDetailViewController.swift; sourceTree = "<group>"; };
+		0CAA4C002486344A00F9EBB2 /* walkthrough.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = walkthrough.storyboard; sourceTree = "<group>"; };
+		0CAA4C02248664FD00F9EBB2 /* WalkthroughContentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = WalkthroughContentViewController.swift; path = BookList/Storyboard/WalkthroughContentViewController.swift; sourceTree = SOURCE_ROOT; };
+		0CAA4C042486692400F9EBB2 /* WalkthroughPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkthroughPageViewController.swift; sourceTree = "<group>"; };
+		0CAA4C062486794A00F9EBB2 /* WalkthroughViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = WalkthroughViewController.swift; path = BookList/Storyboard/WalkthroughViewController.swift; sourceTree = SOURCE_ROOT; };
 		0CE6E6A524715292006AF2AA /* welldone.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = welldone.json; sourceTree = "<group>"; };
 		0CFD93AE247013CF005B858C /* BookDetailTypeViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookDetailTypeViewCell.swift; sourceTree = "<group>"; };
 		0CFD93B0247013E1005B858C /* BookDetailPageViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookDetailPageViewCell.swift; sourceTree = "<group>"; };
@@ -89,15 +95,13 @@
 		0C1B3B0C246E3CDA0028B087 /* BookList */ = {
 			isa = PBXGroup;
 			children = (
+				0CAA4BFF2486325E00F9EBB2 /* Storyboard */,
 				0C1B3B32246E59560028B087 /* View */,
 				0C1B3B31246E59500028B087 /* Model */,
 				0C1B3B30246E59470028B087 /* Controller */,
 				0C1B3B0D246E3CDB0028B087 /* AppDelegate.swift */,
 				0C1B3B0F246E3CDB0028B087 /* SceneDelegate.swift */,
-				0C1B3B13246E3CDB0028B087 /* Main.storyboard */,
-				0C1B3B1B246E3CDB0028B087 /* LaunchScreen.storyboard */,
 				0C1B3B1E246E3CDB0028B087 /* Info.plist */,
-				0C1B3B16246E3CDB0028B087 /* BookList.xcdatamodeld */,
 				0CE6E6A524715292006AF2AA /* welldone.json */,
 				0C1B3B2A246E45D70028B087 /* Assets.xcassets */,
 			);
@@ -111,6 +115,9 @@
 				0C1B3B34246E76E10028B087 /* ReviewViewController.swift */,
 				0C1B3B3A246ECFA10028B087 /* BookDetailViewController.swift */,
 				0C1B3B36246EA9530028B087 /* NewBookController.swift */,
+				0CAA4C062486794A00F9EBB2 /* WalkthroughViewController.swift */,
+				0CAA4C02248664FD00F9EBB2 /* WalkthroughContentViewController.swift */,
+				0CAA4C042486692400F9EBB2 /* WalkthroughPageViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -118,7 +125,7 @@
 		0C1B3B31246E59500028B087 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				0C1B3B2E246E53970028B087 /* Book.swift */,
+				0C1B3B16246E3CDB0028B087 /* BookList.xcdatamodeld */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -135,6 +142,16 @@
 				0CFD93BB2470382A005B858C /* BookDetailAuthorViewCell.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		0CAA4BFF2486325E00F9EBB2 /* Storyboard */ = {
+			isa = PBXGroup;
+			children = (
+				0C1B3B13246E3CDB0028B087 /* Main.storyboard */,
+				0C1B3B1B246E3CDB0028B087 /* LaunchScreen.storyboard */,
+				0CAA4C002486344A00F9EBB2 /* walkthrough.storyboard */,
+			);
+			path = Storyboard;
 			sourceTree = "<group>";
 		};
 		391C8063341306B47AF55F2A /* Pods */ = {
@@ -214,6 +231,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0CAA4C012486344A00F9EBB2 /* walkthrough.storyboard in Resources */,
 				0C1B3B1D246E3CDB0028B087 /* LaunchScreen.storyboard in Resources */,
 				0C1B3B2B246E45D70028B087 /* Assets.xcassets in Resources */,
 				0CE6E6A624715292006AF2AA /* welldone.json in Resources */,
@@ -273,14 +291,16 @@
 				0CFD93B524701879005B858C /* BookDetailPageViewCell.swift in Sources */,
 				0C1B3B18246E3CDB0028B087 /* BookList.xcdatamodeld in Sources */,
 				0C1B3B0E246E3CDB0028B087 /* AppDelegate.swift in Sources */,
-				0C1B3B2F246E53970028B087 /* Book.swift in Sources */,
+				0CAA4C072486794A00F9EBB2 /* WalkthroughViewController.swift in Sources */,
 				0CFD93B8247020A9005B858C /* BookDetailHeaderView.swift in Sources */,
 				0C1B3B25246E3D9C0028B087 /* BookTableViewController.swift in Sources */,
 				0C1B3B27246E424A0028B087 /* BookTableViewCell.swift in Sources */,
+				0CAA4C052486692400F9EBB2 /* WalkthroughPageViewController.swift in Sources */,
 				0CFD93BD2470391F005B858C /* BookDetailAuthorViewCell.swift in Sources */,
 				0CFD93B42470182B005B858C /* BookDetailTypeViewCell.swift in Sources */,
 				0CFD93A5246FC6B9005B858C /* BookDetailViewController.swift in Sources */,
 				0CFD93BE24703923005B858C /* BookDetailNameViewCell.swift in Sources */,
+				0CAA4C03248664FD00F9EBB2 /* WalkthroughContentViewController.swift in Sources */,
 				0C1B3B35246E76E10028B087 /* ReviewViewController.swift in Sources */,
 				0C1B3B37246EA9530028B087 /* NewBookController.swift in Sources */,
 				0CFD93B6247018BD005B858C /* BookDetailMemoViewCell.swift in Sources */,
